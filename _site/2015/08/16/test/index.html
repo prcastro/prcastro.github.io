@@ -4,6 +4,8 @@
 <!-- MathJax support, to display LaTeX -->
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
+
+
 <head>
 
     <meta charset="utf-8">
@@ -12,6 +14,8 @@
     <meta name="description" content="Write your site description here. It will be used as your sites meta description as well!">
 
     <title>Test - My Site</title>
+
+    <!-- <link rel="stylesheet" href="/pygments.css"> -->
 
     <link rel="canonical" href="http://yourdomain.com/2015/08/16/test/">
 
@@ -105,8 +109,24 @@
 
 <script type="math/tex; mode=display">\sum_{x=1}^{10} x^2</script>
 
-<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">function</span><span class="nf"> foo</span><span class="p">()</span>
-    <span class="k">return</span> <span class="mi">10</span>
+<div class="highlight"><pre><code class="language-julia" data-lang="julia"><span class="k">function</span><span class="nf"> FFNNet</span><span class="p">(</span><span class="n">layers</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">FFNNLayer</span><span class="p">},</span> <span class="n">inputsize</span><span class="p">::</span><span class="kt">Int</span><span class="p">)</span>
+    <span class="c"># Create a vector of weight matrices</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Matrix</span><span class="p">{</span><span class="kt">Float64</span><span class="p">},</span> <span class="n">length</span><span class="p">(</span><span class="n">layers</span><span class="p">))</span>
+
+    <span class="err">ɛ</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">))</span>
+
+    <span class="c"># The first weight matrix is from the input (including bias)</span>
+    <span class="c">#  to the first layer (excluding bias unit)</span>
+    <span class="nb">eps</span> <span class="o">=</span> <span class="err">ɛ</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">inputsize</span><span class="p">)</span>
+    <span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">inputsize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="nb">eps</span> <span class="o">-</span> <span class="nb">eps</span>
+
+    <span class="c"># Matrices from layer i-1 (including bias) to layer i</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">2</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">layers</span><span class="p">)</span>
+        <span class="nb">eps</span> <span class="o">=</span> <span class="err">ɛ</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">layers</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">size</span><span class="p">(</span><span class="n">layers</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">layers</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">size</span><span class="p">(</span><span class="n">layers</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="k">return</span> <span class="n">FFNNet</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">inputsize</span><span class="p">)</span>
 <span class="k">end</span></code></pre></div>
 
 

@@ -8,3 +8,11 @@ header-img: "img/post-bg-06.jpg"
 ---
 
 <p>This is only a test!</p>
+
+$$\sum_{x=1}^{10} x^2$$
+
+{% highlight julia %}
+function foo()
+    return 10
+end
+{% endhighlight %}

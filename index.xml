@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Findings in Data Science</title>
+    <link>http://prcastro.github.io/</link>
+    <description>Recent content on Findings in Data Science</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 04 Mar 2018 19:36:54 -0300</lastBuildDate>
+    
+	<atom:link href="http://prcastro.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>First Post</title>
+      <link>http://prcastro.github.io/posts/first-post/</link>
+      <pubDate>Sun, 04 Mar 2018 19:36:54 -0300</pubDate>
+      
+      <guid>http://prcastro.github.io/posts/first-post/</guid>
+      <description>Hi everybody,
+I&amp;rsquo;m starting a new blog to share my findings on Data Science with you. Hope you enjoy it!</description>
+    </item>
+    
+  </channel>
+</rss>
